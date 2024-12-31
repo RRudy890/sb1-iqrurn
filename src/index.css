@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-charcoal text-light-gray;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-off-white font-semibold;
+    text-shadow: 1px 1px 0 theme('colors.gold.shadow');
+  }
+
+  .no-text-shadow {
+    text-shadow: none !important;
+  }
+
+  .text-3d {
+    text-shadow: 1px 1px 0 theme('colors.gold.shadow');
+  }
+
+  .box-3d {
+    box-shadow: 2px 2px 0 theme('colors.gold.shadow'),
+                4px 4px 16px rgba(0, 0, 0, 0.25);
+    transform: translateZ(0);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .box-3d:hover {
+    transform: translateY(-2px) translateZ(0);
+    box-shadow: 3px 3px 0 theme('colors.gold.shadow'),
+                6px 6px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@layer components {
+  .gold-gradient {
+    @apply bg-gradient-to-r from-gold-primary to-gold-secondary hover:from-gold-secondary hover:to-gold-primary;
+    background-size: 200% auto;
+    transition: background-position 0.3s ease-in-out;
+  }
+
+  .gold-gradient:hover {
+    background-position: right center;
+  }
+
+  .content-card {
+    @apply bg-black rounded-lg border border-gold-primary/30 box-3d;
+    background: linear-gradient(135deg, 
+      theme('colors.black') 0%,
+      theme('colors.black') 100%
+    );
+  }
+
+  .nav-link {
+    @apply relative px-4 py-2 text-light-gray hover:text-gold-primary transition-colors duration-200 
+           after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 
+           after:bg-gold-primary after:scale-x-0 after:origin-right after:transition-transform 
+           after:duration-200 hover:after:scale-x-100 hover:after:origin-left text-3d;
+  }
+
+  .btn-gold {
+    @apply gold-gradient text-charcoal font-bold px-6 py-3 rounded-lg transform transition-all 
+           duration-200 hover:scale-105 box-3d uppercase tracking-wider text-sm;
+  }
+
+  .icon-3d {
+    filter: drop-shadow(1px 1px 0 theme('colors.gold.shadow'));
+  }
+
+  .service-card {
+    @apply bg-black rounded-lg border border-gold-primary/30 box-3d p-8 relative overflow-hidden;
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-charcoal;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gold-primary/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gold-primary/40;
+}
